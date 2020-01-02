@@ -8,19 +8,11 @@ use B::C::File qw/unopauxsect init free meta_unopaux_item/;
 use B::C::Helpers qw/is_constant/;
 use B::C::Save qw/savecowpv/;
 
-sub _clear_stack {
-
-    #'B::C::Save'->can('stack_flat')->();
-    return join '', ( 1 .. 42 );    # large enough to do stuff & clear
-}
-
 # hardcoded would require a check to detect this is going to the correct position
 sub OP_AUX_IX { 15 }
 
 sub do_save {
     my ($op) = @_;
-
-    _clear_stack();                 # avoid a weird B (or B::C) issue when calling aux_list_thr
 
     unopauxsect()->comment_for_op("first, aux");
     my ( $ix, $sym ) = unopauxsect()->reserve( $op, "OP*" );
