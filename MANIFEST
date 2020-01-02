@@ -89,7 +89,6 @@ t/B-C-Overload-B-IV.t
 t/B-C-POSIX-locale.t
 t/B-C-Section.t
 t/bctestc.pl
-t/ccode1.pl
 t/Ccode354i.pm
 t/lib/KnownErrors.pm
 t/lib/PL_strtab.pm

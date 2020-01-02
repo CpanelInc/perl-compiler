@@ -141,6 +141,12 @@ WriteMakefile(
         'ExtUtils::Embed' => '1.25'     # mandatory (missing on redhat)
                                         #'B'        => '1.0901' # required but in CORE
     },
+    'TEST_REQUIRES' => {
+        'Test2::Tools::Explain'     => '0',
+        'Test2::Plugin::NoWarnings' => '0',
+        'Test::Trap'                => '0',
+        'Test::Deep'                => '0',
+    },
     'AUTHOR'   => 'Malcolm Beattie (retired), ' . 'Reini Urban <perl-compiler@googlegroups.com>',
     'ABSTRACT' => 'Perl compiler',
     'LICENSE'  => 'perl',
