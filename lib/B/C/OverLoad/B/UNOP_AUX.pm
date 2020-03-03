@@ -136,6 +136,7 @@ sub do_save {
                 if ( $itemsym =~ qr{^PL_} ) {
                     $field = "{.sv=Nullsv}";        #  \t/* $itemsym */
                     init()->add("$symat.sv = (SV*)$itemsym;");
+                    init()->add("SvREFCNT_inc_NN((SV*)$itemsym);");
                 }
                 else {
                     ## gv or other late inits
