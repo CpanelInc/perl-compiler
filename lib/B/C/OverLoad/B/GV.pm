@@ -11,11 +11,6 @@ use B::C::File qw/init init_static_assignments gvsect gpsect xpvgvsect init_boot
 
 my %gptable;
 
-my $CORE_SYMS = {
-    'main::ENV'  => 'PL_envgv',
-    'main::ARGV' => 'PL_argvgv',
-};
-
 # These variables are the proxy variables we will use to save @_ and $_
 our $under = '';
 our @under = ();
@@ -39,9 +34,6 @@ sub do_save {
             return q{NULL};
         }
     }
-
-    # return earlier for special cases
-    return $CORE_SYMS->{ $gv->get_fullname } if $gv->is_coresym();
 
     my ( $ix, $sym ) = gvsect()->reserve($gv);
     gvsect()->debug( $gv->get_fullname(), $gv );
@@ -89,12 +81,6 @@ sub get_package {
 
     return '__ANON__' if ref( $gv->STASH ) eq 'B::SPECIAL';
     return $gv->STASH->NAME;
-}
-
-sub is_coresym {
-    my $gv = shift;
-
-    return $CORE_SYMS->{ $gv->get_fullname() } ? 1 : 0;
 }
 
 sub get_fullname {
