@@ -47,7 +47,8 @@ jobs:
           - 'uni/*.t'
 
     container:
-      image: cpanelos/perl-compiler:perl-v5.30.0
+      image: docker://docker.pkg.github.com/cpanel/docker-perl-compiler/bc:5.30.0
+      #image: cpanelos/perl-compiler:perl-v5.30.0
 
     steps:
       - name: Checkout
