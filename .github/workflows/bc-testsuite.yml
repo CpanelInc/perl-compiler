@@ -46,17 +46,25 @@ jobs:
           - 're/[s-z]*.t'
           - 'uni/*.t'
 
+    container:
+      image:  docker://ghcr.io/cpanel/docker-perl-compiler/bc:5.30.0
+      #image: docker://docker.pkg.github.com/cpanel/docker-perl-compiler/bc:5.30.0
+      #image: cpanelos/perl-compiler:perl-v5.30.0
+
     steps:
 
-      - name: Docker Login
-        uses: azure/docker-login@v1
-        with:
-          login-server: docker.pkg.github.com
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # also consider for login
+      # uses: docker/login-action@v1
 
-      - name: docker
-        uses: docker://docker.pkg.github.com/cpanel/docker-perl-compiler/bc:5.30.0
+      # - name: Docker Login
+      #   uses: azure/docker-login@v1
+      #   with:
+      #     login-server: docker.pkg.github.com
+      #     username: $GITHUB_ACTOR
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: docker
+      #   uses: docker://docker.pkg.github.com/cpanel/docker-perl-compiler/bc:5.30.0
 
       - name: Checkout
         uses: actions/checkout@v1
