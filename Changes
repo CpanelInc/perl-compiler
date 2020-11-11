@@ -1,3 +1,7 @@
+5.030004 2020-11-11
+
+    Fix warnings from UNOP_AUX
+
 5.030003 2020-03-04
 
      Fix a SEGV when clearing UNOP_AUX
