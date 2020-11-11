@@ -26,8 +26,14 @@ sub do_save {
     my ( $ix, $sym ) = unopauxsect()->reserve( $op, "OP*" );
     unopauxsect()->debug( $op->name, $op );
 
+    my $first = $op->first->save;
+    # cast to avoid warning
+    if ( $first eq '(void*)Nullsv' ) {
+        $first = '(OP*) 0';
+    }
+
     unopauxsect()->supdate(
-        $ix, "%s, %s, %s", $op->save_baseop, $op->first->save,
+        $ix, "%s, %s, %s", $op->save_baseop, $first,
         'AUX-TO-BE-FILLED'
     );
 
@@ -39,7 +45,7 @@ sub do_save {
         #      IV ix = PTR2IV(cUNOP_AUXo->op_aux);
 
         my $op_aux = $op->aux_ptr2iv // 0;
-        unopauxsect()->update_field( $ix, OP_AUX_IX(), $op_aux );
+        unopauxsect()->update_field( $ix, OP_AUX_IX(), ' (UNOP_AUX_item *) ' . $op_aux );
 
         return $sym;
     }
